@@ -39,6 +39,51 @@ public:
 		this->y = y;
 	}
 
+	// constructor
+
+	Point()
+	{
+		x = y = 0;
+		cout << "Constructor:\t" << this << endl;
+
+	}
+	Point(double x)
+	{
+		this->x = x;
+		this->y = 0;
+		cout << "SingleArgumentConstructor:\t" << this << endl;
+	
+	}
+	Point(double x, double y)
+	{
+		this->x = x;
+		this->y = y;
+		cout << "Constructor:\t\t" << this << endl;
+
+	}
+
+	Point(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyConstructor:\t" << this << endl;
+	
+	}
+	~Point()
+	{
+		cout << "Destructor:\t\t" << this << endl;
+	}
+
+	//Operators
+
+	void operator=(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyAssigment:\t\t" << this << endl;
+
+	}
+
 	double distance(Point other)
 	{
 		double x_distance = this->x - other.x;
@@ -61,11 +106,18 @@ public:
 
 };
 
-
+double distance(Point A, Point B)
+{
+	double x_distance = A.get_x() - B.get_x();
+	double y_distance = A.get_y() - B.get_y();
+	double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
+	return distance;
+}
 
 
 
 //#define STRUCT_POINT 
+//#define DISTANCE_CHECK
 
 void main()
 {
@@ -81,6 +133,7 @@ void main()
 	cout << pA->x << tab << pA->y << endl;
 #endif
 
+#ifdef DISTANCE_CHECK
 	Point A;
 	A.set_x(2);
 	A.set_y(3);
@@ -90,6 +143,9 @@ void main()
 	B.set_x(4);
 	B.set_y(5);
 	cout << B.distance(A) << endl;
+	cout << A.distance(B) << endl;
+	cout << distance(A, B) << endl;
+	cout << distance(B, A) << endl;
 
 
 	/*for (int i =0; i < 5; i++)
@@ -98,5 +154,17 @@ void main()
 
 	}
 	cout << endl; */
+#endif  //DISTANCE_CHECK
 
+	Point A;
+	A.print();
+	Point B = 3;
+	B.print();
+	Point C(2, 3);
+	C.print();
+	Point D=C;
+	D.print();
+	Point E;
+	E = C;
+	E.print();
 }
